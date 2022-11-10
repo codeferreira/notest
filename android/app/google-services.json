@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "139050975971",
+    "project_id": "ferreiracode-notest",
+    "storage_bucket": "ferreiracode-notest.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:139050975971:android:3d89b36e0ef4fd14de3bd6",
+        "android_client_info": {
+          "package_name": "com.ferreiracode.notest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "139050975971-h7q2po3lbrbkmb8gei0q93naifo17jpo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfiZA7E9SobjyIIvAxeGnaBzbQ1OdDOQg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "139050975971-h7q2po3lbrbkmb8gei0q93naifo17jpo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "139050975971-t1obisbf6k9vr2d6mvkk06rjpse13m58.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ferreiracode.notest"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

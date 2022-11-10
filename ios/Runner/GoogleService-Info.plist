@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>139050975971-t1obisbf6k9vr2d6mvkk06rjpse13m58.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.139050975971-t1obisbf6k9vr2d6mvkk06rjpse13m58</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD6fUF3Q7T3y5sH_ohYtp1bwHuddyQYz70</string>
+	<key>GCM_SENDER_ID</key>
+	<string>139050975971</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.ferreiracode.notest</string>
+	<key>PROJECT_ID</key>
+	<string>ferreiracode-notest</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ferreiracode-notest.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:139050975971:ios:2b75ce9000bd23e9de3bd6</string>
+</dict>
+</plist>
