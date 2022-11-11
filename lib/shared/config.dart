@@ -4,5 +4,5 @@ class Config {
   static String get firebaseAndroidKey => _get('FIREBASE_ANDROID_KEY');
   static String get firebaseIOSKey => _get('FIREBASE_IOS_KEY');
 
-  static String _get(String name) => DotEnv().env[name] ?? '';
+  static String _get(String name) => dotenv.env[name] ?? '';
 }
