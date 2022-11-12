@@ -63,11 +63,14 @@ class _LoginViewState extends State<LoginView> {
 
                 if (!mounted) return;
 
-                if (credentials.user?.emailVerified ?? false) {
+                final user = credentials.user;
+
+                if (user?.emailVerified ?? false) {
                   Navigator.of(context).pushNamedAndRemoveUntil(
                     verifyEmailRoute,
                     (route) => false,
                   );
+                  return;
                 }
 
                 Navigator.of(context).pushNamedAndRemoveUntil(
@@ -80,17 +83,21 @@ class _LoginViewState extends State<LoginView> {
                     context,
                     'User not found',
                   );
-                } else if (error.code == 'wrong-password') {
+                  return;
+                }
+
+                if (error.code == 'wrong-password') {
                   await showErrorDialog(
                     context,
                     'Email or Password is incorrect',
                   );
-                } else {
-                  await showErrorDialog(
-                    context,
-                    'Error: ${error.code}',
-                  );
+                  return;
                 }
+
+                await showErrorDialog(
+                  context,
+                  'Error: ${error.code}',
+                );
               } catch (error) {
                 await showErrorDialog(
                   context,

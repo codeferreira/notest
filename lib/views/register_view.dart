@@ -73,22 +73,29 @@ class _RegisterViewState extends State<RegisterView> {
                     context,
                     'Password is too weak',
                   );
-                } else if (error.code == 'invalid-email') {
+                  return;
+                }
+
+                if (error.code == 'invalid-email') {
                   await showErrorDialog(
                     context,
                     'Email has invalid format',
                   );
-                } else if (error.code == 'email-already-in-use') {
+                  return;
+                }
+
+                if (error.code == 'email-already-in-use') {
                   await showErrorDialog(
                     context,
                     'Email is already in use',
                   );
-                } else {
-                  await showErrorDialog(
-                    context,
-                    'Error: ${error.code}',
-                  );
+                  return;
                 }
+
+                await showErrorDialog(
+                  context,
+                  'Error: ${error.code}',
+                );
               } catch (error) {
                 await showErrorDialog(
                   context,
