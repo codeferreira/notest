@@ -9,18 +9,20 @@ import 'package:notest/views/verify_email_view.dart';
 void main() async {
   await dotenv.load(fileName: '.env');
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MaterialApp(
-    title: 'Flutter Demo',
-    theme: ThemeData(
-      primarySwatch: Colors.blue,
+  runApp(
+    MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+      ),
+      home: const HomePage(),
+      routes: routes,
     ),
-    home: const HomePage(),
-    routes: routes,
-  ));
+  );
 }
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,6 @@ class HomePage extends StatelessWidget {
         switch (snapshot.connectionState) {
           case ConnectionState.done:
             final user = AuthService.firebase().currentUser;
-
             if (user != null) {
               if (user.isEmailVerified) {
                 return const NotesView();
