@@ -1,4 +1,4 @@
-import 'package:notest/services/auth/auth_expections.dart';
+import 'package:notest/services/auth/auth_exceptions.dart';
 import 'package:notest/services/auth/auth_provider.dart';
 import 'package:notest/services/auth/auth_user.dart';
 import 'package:test/test.dart';

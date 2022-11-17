@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:notest/constants/routes.dart';
-import 'package:notest/services/auth/auth_expections.dart';
+import 'package:notest/services/auth/auth_exceptions.dart';
 import 'package:notest/services/auth/auth_service.dart';
 import 'package:notest/utilities/dialogs/error_dialog.dart';
 
