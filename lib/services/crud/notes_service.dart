@@ -7,17 +7,22 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' show join;
 
 class NotesService {
-  static final NotesService _shared = NotesService._sharedInstance();
-  NotesService._sharedInstance();
-
-  factory NotesService() => _shared;
-
   Database? _db;
+
+  late final StreamController<List<DatabaseNote>> _notesStreamcontroller;
 
   List<DatabaseNote> _notes = [];
 
-  final _notesStreamcontroller =
-      StreamController<List<DatabaseNote>>.broadcast();
+  static final NotesService _shared = NotesService._sharedInstance();
+  NotesService._sharedInstance() {
+    _notesStreamcontroller = StreamController<List<DatabaseNote>>.broadcast(
+      onListen: () {
+        _notesStreamcontroller.sink.add(_notes);
+      },
+    );
+  }
+
+  factory NotesService() => _shared;
 
   Stream<List<DatabaseNote>> get allNotes => _notesStreamcontroller.stream;
 
