@@ -9,22 +9,21 @@ import 'package:path/path.dart' show join;
 class NotesService {
   Database? _db;
 
-  late final StreamController<List<DatabaseNote>> _notesStreamcontroller;
-
   List<DatabaseNote> _notes = [];
 
   static final NotesService _shared = NotesService._sharedInstance();
   NotesService._sharedInstance() {
-    _notesStreamcontroller = StreamController<List<DatabaseNote>>.broadcast(
+    _notesStreamController = StreamController<List<DatabaseNote>>.broadcast(
       onListen: () {
-        _notesStreamcontroller.sink.add(_notes);
+        _notesStreamController.sink.add(_notes);
       },
     );
   }
-
   factory NotesService() => _shared;
 
-  Stream<List<DatabaseNote>> get allNotes => _notesStreamcontroller.stream;
+  late final StreamController<List<DatabaseNote>> _notesStreamController;
+
+  Stream<List<DatabaseNote>> get allNotes => _notesStreamController.stream;
 
   Future<DatabaseUser> getOrCreateUser({required String email}) async {
     try {
@@ -33,7 +32,7 @@ class NotesService {
     } on CouldNotFindUser {
       final createdUser = await createUser(email: email);
       return createdUser;
-    } catch (_) {
+    } catch (e) {
       rethrow;
     }
   }
@@ -41,7 +40,7 @@ class NotesService {
   Future<void> _cacheNotes() async {
     final allNotes = await getAllNotes();
     _notes = allNotes.toList();
-    _notesStreamcontroller.add(_notes);
+    _notesStreamController.add(_notes);
   }
 
   Future<DatabaseNote> updateNote({
@@ -51,8 +50,10 @@ class NotesService {
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
 
+    // make sure note exists
     await getNote(id: note.id);
 
+    // update DB
     final updatesCount = await db.update(noteTable, {
       textColumn: text,
       isSyncedWithCloudColumn: 0,
@@ -64,7 +65,7 @@ class NotesService {
       final updatedNote = await getNote(id: note.id);
       _notes.removeWhere((note) => note.id == updatedNote.id);
       _notes.add(updatedNote);
-      _notesStreamcontroller.add(_notes);
+      _notesStreamController.add(_notes);
       return updatedNote;
     }
   }
@@ -93,7 +94,7 @@ class NotesService {
       final note = DatabaseNote.fromRow(notes.first);
       _notes.removeWhere((note) => note.id == id);
       _notes.add(note);
-      _notesStreamcontroller.add(_notes);
+      _notesStreamController.add(_notes);
       return note;
     }
   }
@@ -102,10 +103,8 @@ class NotesService {
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
     final numberOfDeletions = await db.delete(noteTable);
-
     _notes = [];
-    _notesStreamcontroller.add(_notes);
-
+    _notesStreamController.add(_notes);
     return numberOfDeletions;
   }
 
@@ -117,13 +116,12 @@ class NotesService {
       where: 'id = ?',
       whereArgs: [id],
     );
-
     if (deletedCount == 0) {
       throw CouldNotDeleteNote();
+    } else {
+      _notes.removeWhere((note) => note.id == id);
+      _notesStreamController.add(_notes);
     }
-
-    _notes.removeWhere((note) => note.id == id);
-    _notesStreamcontroller.add(_notes);
   }
 
   Future<DatabaseNote> createNote({required DatabaseUser owner}) async {
@@ -152,7 +150,7 @@ class NotesService {
     );
 
     _notes.add(note);
-    _notesStreamcontroller.add(_notes);
+    _notesStreamController.add(_notes);
 
     return note;
   }
@@ -234,7 +232,7 @@ class NotesService {
     try {
       await open();
     } on DatabaseAlreadyOpenException {
-      //empty
+      // empty
     }
   }
 
