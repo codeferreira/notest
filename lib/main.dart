@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:notest/constants/routes.dart';
+import 'package:notest/routes/routes.dart';
 import 'package:notest/services/auth/auth_service.dart';
 import 'package:notest/views/login_view.dart';
-import 'package:notest/views/notes_view.dart';
-import 'package:notest/views/register_view.dart';
+import 'package:notest/views/notes/notes_view.dart';
 import 'package:notest/views/verify_email_view.dart';
 
 void main() async {
@@ -16,12 +15,7 @@ void main() async {
       primarySwatch: Colors.blue,
     ),
     home: const HomePage(),
-    routes: {
-      loginRoute: (context) => const LoginView(),
-      registerRoute: (context) => const RegisterView(),
-      verifyEmailRoute: (context) => const VerifyEmailView(),
-      notesRoute: (context) => const NotesView(),
-    },
+    routes: routes,
   ));
 }
 
