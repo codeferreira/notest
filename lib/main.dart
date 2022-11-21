@@ -8,6 +8,7 @@ import 'package:notest/services/auth/bloc/auth_state.dart';
 import 'package:notest/services/auth/firebase_auth_provider.dart';
 import 'package:notest/views/login_view.dart';
 import 'package:notest/views/notes/notes_view.dart';
+import 'package:notest/views/register_view.dart';
 import 'package:notest/views/verify_email_view.dart';
 
 void main() async {
@@ -46,6 +47,10 @@ class HomePage extends StatelessWidget {
 
         if (state is AuthStateLoggedOut) {
           return const LoginView();
+        }
+
+        if (state is AuthStateRegistering) {
+          return const RegisterView();
         }
 
         return const Scaffold(
